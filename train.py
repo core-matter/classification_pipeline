@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str, default='efficientnet-b0')
     parser.add_argument('--pretrained', type=bool, default=False)
     parser.add_argument('--experiment_name', type=str, default='default_experiment')
-    parser.add_argument('--resume_training', type=bool, default=False)
+    parser.add_argument('--resume_training', action='store_true')
     args = parser.parse_args()
 
     #######################################################################
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     writer = SummaryWriter(log_dir=args.writer_path + args.experiment_name)
 
     if args.resume_training:
-        print('ha')
+        print('resume_training')
         checkpoint = torch.load(args.checkpoints_path + args.experiment_name + '/checkpoints.pth')
         model.load_state_dict(checkpoint['model_state_dict'])
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
