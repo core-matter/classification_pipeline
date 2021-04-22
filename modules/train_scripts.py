@@ -20,6 +20,7 @@ def fit_epoch(model, train_loader, criterion, optimizer, scheduler, device='cuda
     batch_size = train_loader.batch_size
     it = 0
     model.train()
+    print('\n')
     for inputs, labels in train_loader:
         optimizer.zero_grad()
 
@@ -27,7 +28,7 @@ def fit_epoch(model, train_loader, criterion, optimizer, scheduler, device='cuda
         labels = labels.to(device)
 
         outputs = model(inputs)
-        # print(outputs.shape)
+     
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
