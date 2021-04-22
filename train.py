@@ -9,6 +9,8 @@ import torch.nn as nn
 from efficientnet_pytorch import EfficientNet
 import pickle
 import os
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_path", type=str, default='./data')
@@ -26,7 +28,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str, default='efficientnet-b0')
     parser.add_argument('--pretrained', type=bool, default=False)
     parser.add_argument('--experiment_name', type=str, default='default_experiment')
-    parser.add_argument('--resume_training', type=bool, default=True)
+    parser.add_argument('--resume_training', type=bool, default=False)
     args = parser.parse_args()
 
     #######################################################################
