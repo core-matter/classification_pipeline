@@ -1,7 +1,7 @@
 import torch.nn as nn
 from math import pi, cos
 import torch
-
+from tqdm import tqdm
 
 def weights_init(m):
     """
@@ -24,11 +24,10 @@ def warm_up_and_annealing(it, warm_up_epochs, epochs, dataloader, resume_trainin
 def predict(model, test_loader, device):
     with torch.no_grad():
         logits = []
-        for inputs in test_loader:
+        for inputs in tqdm(test_loader):
             inputs = inputs.to(device)
             model.eval()
             outputs = model(inputs).cpu()
             logits.append(outputs)
-
     probs = nn.functional.softmax(torch.cat(logits), dim=-1).numpy()
     return probs
