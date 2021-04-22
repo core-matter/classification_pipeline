@@ -1,4 +1,5 @@
 import torch
+import pandas as pd
 from torch.utils.data import DataLoader
 from modules.train_scripts import train
 import argparse
@@ -16,14 +17,16 @@ import numpy as np
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset_path", type=str, default='./data')
+    parser.add_argument("--result_path", type=str, default='./results/')
     parser.add_argument("--checkpoints_path", type=str, default='./checkpoints/')
     parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--model_name', type=str, default='efficientnet-b0')
     parser.add_argument('--image_path', type=str, default='./data/val/n01440764/n01440764_141.JPEG') #TODO add default path
-    parser.add_argument('--pretrained', type=bool, default=False)
+    parser.add_argument('--pretrained', action='store_true')
     parser.add_argument('--num_classes', type=int, default=10)
     parser.add_argument('--experiment_name', type=str, default='default_experiment')
-    parser.add_argument('--one_sample', type=bool, default=True)
+    parser.add_argument('--one_sample', action='store_true')
     args = parser.parse_args()
 
     DEVICE = torch.device(args.device)
@@ -56,8 +59,12 @@ if __name__ == '__main__':
         print(label_encoder.classes_[y_pred])
     else:
         val_dataset = DataClass(args.dataset_path, mode='val')
+        files = val_dataset.files
         images = [val_dataset[idx][0].unsqueeze(0) for idx in range(len(val_dataset))]
         probs = predict(model, images, args.device)
-        y_pred = torch.argmax(probs, -1)
-        true_labels = [val_dataset[idx][1] for idx in range(len(val_dataset))]
+        y_pred = np.argmax(probs, -1)
+        true_labels = [label_encoder.classes_[val_dataset[idx][1]] for idx in range(len(val_dataset))]
         preds_labels = [label_encoder.classes_[i] for i in y_pred]
+        df = pd.DataFrame.from_dict({'img_name': files, 'true': true_labels, 'pred': preds_labels})
+        df.to_csv(args.result_path + args.experiment_name + '.csv', index=False)
+
