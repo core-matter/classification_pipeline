@@ -60,6 +60,7 @@ if __name__ == '__main__':
     writer = SummaryWriter(log_dir=args.writer_path + args.experiment_name)
 
     if args.resume_training:
+        print('ha')
         checkpoint = torch.load(args.checkpoints_path + args.experiment_name + '/checkpoints.pth')
         model.load_state_dict(checkpoint['model_state_dict'])
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
