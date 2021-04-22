@@ -65,7 +65,7 @@ if __name__ == '__main__':
         model.load_state_dict(checkpoint['model_state_dict'])
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        start_epoch = checkpoint['epoch']
+        args.start_epoch = checkpoint['epoch'] + 1
         model.train()
 
     train(model, train_loader, val_loader, optimizer, scheduler, criterion, epochs=args.epochs,
