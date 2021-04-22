@@ -41,13 +41,11 @@ def fit_epoch(model, train_loader, criterion, optimizer, scheduler, device='cuda
         processed_data += batch_size
         current_loss += loss.item() * batch_size
         if it % 20 == 0:
-            print('lr', optimizer.param_groups[0]['lr'])
-            print("Loss/train", loss.item() * batch_size / processed_data)
-            print("accuracy/train", current_corrects.cpu().numpy() / processed_data, '\n')
-            # writer.add_scalar("Loss/train", loss.item() * inputs.size(0), it)
-            # writer.add_scalar("accuracy/train", current_corrects.cpu().numpy() / processed_data, it)
+            lr = optimizer.param_groups[0]['lr']
+            print(f'it: {it} lr: {lr} train_loss:{current_loss / processed_data} train_acc:{current_corrects.cpu().numpy() / processed_data}')
 
-    train_loss = current_loss / processed_data  # TODO нужно делить на inputs.size(0)
+
+    train_loss = current_loss / processed_data 
     train_acc = current_corrects.cpu().numpy() / processed_data
 
     return train_loss, train_acc
@@ -82,11 +80,7 @@ def eval_epoch(model, val_loader, criterion, device='cuda'):
         current_loss += loss.item() * batch_size
         current_corrects += torch.sum(preds == labels.data)
         processed_size += batch_size
-        # if it % 20 == 0:
-        #   print("Loss/val", loss.item() * inputs.size(0) / processed_size)
-        #   print("accuracy/val", current_corrects.cpu().numpy() / processed_size)
-        # writer.add_scalar("Loss/train", loss.item() * inputs.size(0), it)
-        # writer.add_scalar("accuracy/train", current_corrects.cpu().numpy() / processed_data, it)
+        
     val_loss = current_loss / processed_size
     val_acc = current_corrects.cpu().numpy() / processed_size
     return val_loss, val_acc
@@ -117,7 +111,7 @@ def train(model, train_loader, val_loader, optimizer, scheduler, criterion, epoc
         train_loss, train_acc = fit_epoch(model, train_loader, criterion, optimizer, scheduler, device)
         val_loss, val_acc = eval_epoch(model, val_loader, criterion, device)
 
-        writer.add_scalars("loss", {'train_loss': train_loss, 'val_loss': val_loss}, epoch) #TODO добавлять в название эксперимента Lr и batch size
+        writer.add_scalars("loss", {'train_loss': train_loss, 'val_loss': val_loss}, epoch)
         writer.add_scalars("accuracy", {'train_acc': train_acc, 'val_acc': val_acc}, epoch)
 
         print(f' \n epoch: {epoch} \n train_loss:{train_loss} \n val_loss:{val_loss}'
