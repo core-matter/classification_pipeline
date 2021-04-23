@@ -4,7 +4,9 @@ from tqdm import tqdm
 
 def fit_epoch(model, train_loader, criterion, optimizer, scheduler, device='cuda'):
     """
+    trainig on batch iterations
     values for params by default
+    
     :param model: efficient_net
     :param train_loader: data loader
     :param criterion: cross entropy
@@ -54,7 +56,9 @@ def fit_epoch(model, train_loader, criterion, optimizer, scheduler, device='cuda
 
 def eval_epoch(model, val_loader, criterion, device='cuda'):
     """
+    evaluation on batch iteratiions
     values for params by default
+    
     :param model: efficient_net
     :param val_loader: data loader
     :param criterion: cross entropy
@@ -91,6 +95,7 @@ def train(model, train_loader, val_loader, optimizer, scheduler, criterion, epoc
     """
     Results of training and evaluation procedures are accumulated in this function
     as well as saving model and adding results to tensorboard
+    
     :param model: efficient net
     :param train_loader: data loader
     :param val_loader: data loader
