@@ -22,7 +22,6 @@ if __name__ == '__main__':
     parser.add_argument('--num_classes', type=int, default=10)
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--start_epoch', type=int, default=0, help='epoch to start from when training is resumed')
-    parser.add_argument('--supervised_ratio', type=float, default=1, help='ratio of supervised data')
     parser.add_argument('--num_workers', type=int, default=2)
     parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--model_name', type=str, default='efficientnet-b0')
