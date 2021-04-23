@@ -38,7 +38,7 @@ class DataClass(Dataset):
         elif self.mode == 'val':
             image = self.transform_val(image)
         else:
-            print('wrong mode: available modes - train, val')  # TODO кидать исключение или оставить так
+            print('wrong mode: available modes - train, val') 
 
         label = self.labels[idx]
         return image, label
@@ -46,10 +46,3 @@ class DataClass(Dataset):
     def __len__(self):
         return len(self.files)
 
-
-# это в аргпарс пойдет позже
-
-train_dataset = DataClass(path='C:\\Users\X260\PycharmProjects\class_pipeline\data', mode='train')
-val_dataset = DataClass(path='C:\\Users\X260\PycharmProjects\class_pipeline\data', mode='val')
-# print(len(train_dataset))
-# print(len(val_dataset))
