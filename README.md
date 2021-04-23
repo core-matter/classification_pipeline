@@ -3,7 +3,7 @@ Pipline for classification task in CV on PyTorch.
 
 
 The pipline leverages collection of Efficient-nets (b0-b7) and 
-tested on [Imagenette dataset](https://github.com/fastai/imagenette). 
+tested on [Imagewoof dataset](https://github.com/fastai/imagenette). 
 
 ```
 Repository
@@ -84,7 +84,7 @@ predict.py [-h]   [--dataset_path DATASET_PATH]
 ## Example
 For interaction with the pipline use 'example of usage.ipynb' file.
 
-Tensorboard logs example [link](https://tensorboard.dev/experiment/9LbZmsE5Tri4TGudWV5MFg/#scalars).
+Tensorboard logs example [link](https://tensorboard.dev/experiment/QZh6hnKWT0e86JOVOqIotQ/#scalars).
 
 
 ## TODO:
