@@ -82,9 +82,9 @@ predict.py [-h]   [--dataset_path DATASET_PATH]
  
 ~~~
 ## Example
-For interaction with the pipline use 'example of usage.ipynb' file
+For interaction with the pipline use 'example of usage.ipynb' file.
 
-Tensorobard logs example [link](https://tensorboard.dev/experiment/9LbZmsE5Tri4TGudWV5MFg/#scalars)
+Tensorboard logs example [link](https://tensorboard.dev/experiment/9LbZmsE5Tri4TGudWV5MFg/#scalars).
 
 
 ## TODO:
